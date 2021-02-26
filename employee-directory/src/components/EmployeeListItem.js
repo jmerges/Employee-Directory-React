@@ -27,19 +27,26 @@ function EmployeeListItem(props) {
        
     }
     return (
-        <ul>
-            <li>
-                <div className="row">
-                    <div className="col-2">
-                        <img src={listState.data.image || ""} alt="Employee Image" />
-                    </div>
-                        <p>{listState.data.name}</p>
-                        <p>{listState.data.email}</p>
-                        <p>{listState.data.phone}</p>
-                        <p>{listState.data.dob}</p>
+        <li>
+            <div className="row">
+                <div className="col-2 border">
+                    <img src={listState.data.image || ""} alt="Employee Image" />
                 </div>
-            </li>
-        </ul>
+                <div className="col-2 border">
+                    <p>{listState.data.name}</p>
+                </div>
+                <div className="col-2 border">
+                    <p>{listState.data.phone}</p>
+                </div>
+                <div className="col-2 border">
+
+                    <p><a href={"mailto: "+listState.data.email}>{listState.data.email}</a></p>
+                </div>
+                <div className="col-2 border">
+                    <p>{listState.data.dob}</p>
+                </div>                    
+            </div>
+        </li>
     );
 
 }
