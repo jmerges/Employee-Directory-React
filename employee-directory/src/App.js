@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
-import EmployeeListItem from "./components/EmployeeList";
+import EmployeeListItem from "./components/EmployeeListItem";
 import axios from "axios";
 
 function App() {
@@ -14,32 +14,43 @@ function App() {
   }]);
 
   useEffect(() => {
-    // for (var i=0; i<1; i++) {
-    axios("https://randomuser.me/api/")
+    var numResults = 20;
+    axios("https://randomuser.me/api/?results="+numResults)
       .then(({ data }) => {
-        console.log(data.results);
-        var stateObj = {
-          image: data.results[0].picture.thumbnail,
-          name: data.results[0].name.first + " " + data.results[0].name.last,
-          phone: data.results[0].phone,
-          email: data.results[0].email,
-          dob: data.results[0].dob.date
-        };
-        
-        console.log(stateObj);
-        if (state.image === "") {
-          setState([stateObj]);
-        } else {
-          setState([...state, stateObj]);
+        var stateArr = [{
+          image: "",
+          name: "",
+          phone: "",
+          email: "",
+          dob: ""
+        }];
+        for (var i=0; i<numResults; i++) {
+          console.log(data.results);
+          var stateObj = {
+            image: data.results[i].picture.thumbnail,
+            name: data.results[i].name.first + " " + data.results[i].name.last,
+            phone: data.results[i].phone,
+            email: data.results[i].email,
+            dob: data.results[i].dob.date
+          };
+          console.log(stateObj);
+          stateArr.push(stateObj);
+          console.log(stateArr);
         }
+        console.log(stateArr);
+        setState(stateArr);
+
+        
+        console.log(state);
       });
-    // }
-    console.log(state);
+
   }, []);
 
   return (
     <div>
-      <EmployeeListItem employeeArray={state} />
+      {state.map(obj => {
+        return <EmployeeListItem employeeArray={obj} />
+      })}
     </div>
   );
 }

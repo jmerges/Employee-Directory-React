@@ -7,27 +7,36 @@ function EmployeeListItem(props) {
     });
 
     useEffect(() => {
-        if (!props.employeeArray[1]) {
+        if (!props.employeeArray) {
             console.log(listState);
             return (<li>
                 <p>Loading</p>
             </li>);
+        } else if (listState.state) {
+            if (listState.state==="LOADING") {
+                setListState({state: "LOADED", data: props.employeeArray});
+                console.log(props.employeeArray);
+            }
+
         }
 
-        console.log(listState);
-        setListState({state: "LOADED", data: props.employeeArray[1]});
     });
     
             // props."array".map
+    if (props.employeeArray) {
+       
+    }
     return (
         <ul>
             <li>
                 <div className="row">
                     <div className="col-2">
-                        {/* <img src={listState.data.image || ""} alt="Employee Image" /> */}
-                        <img src={""} alt="Employee Image" />
+                        <img src={listState.data.image || ""} alt="Employee Image" />
                     </div>
-                        <p>{props.employeeArray}</p>
+                        <p>{listState.data.name}</p>
+                        <p>{listState.data.email}</p>
+                        <p>{listState.data.phone}</p>
+                        <p>{listState.data.dob}</p>
                 </div>
             </li>
         </ul>
