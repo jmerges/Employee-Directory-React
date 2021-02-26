@@ -20,13 +20,7 @@ function App() {
     var numResults = 10;
     axios("https://randomuser.me/api/?results="+numResults)
       .then(({ data }) => {
-        var stateArr = [{
-          image: "",
-          name: "",
-          phone: "",
-          email: "",
-          dob: ""
-        }];
+        var stateArr = [];
         for (var i=0; i<numResults; i++) {
           console.log(data.results);
           var stateObj = {
@@ -51,15 +45,14 @@ function App() {
   }, []);
 
   function handleChange(event) {
-    event.preventDefault();
     var input = event.target.value.toLowerCase();
-    var filterArr = [];
-    for (var i=0; i<state.length; i++) {
-      var lowerCaseName = state[i].name.toLowerCase();
-      if (lowerCaseName.includes(input)) {
-        filterArr.push(state[i]);
-      }
-    }
+    var filterArr = state.filter(obj => obj.name.toLowerCase().includes(input));
+    // for (var i=0; i<state.length; i++) {
+    //   var lowerCaseName = state[i].name.toLowerCase();
+    //   if (lowerCaseName.includes(input)) {
+    //     filterArr.push(state[i]);
+    //   }
+    // }
     setFilter(filterArr);
   }
 
@@ -83,7 +76,6 @@ function App() {
     }
     console.log(workArr);
     setFilter(workArr);
-    return
   }
 
   return (
@@ -95,12 +87,12 @@ function App() {
             <h3>Picture</h3>
           </div>
           <div className="col-2">
-            <h3 onClick={() => nameSort()}>Name</h3>
+            <h3 onClick={nameSort}>Name</h3>
           </div>
           <div className="col-2">
             <h3>Phone</h3>
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <h3>Email</h3>
           </div>
           <div className="col-2">

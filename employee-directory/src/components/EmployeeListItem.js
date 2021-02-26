@@ -15,7 +15,7 @@ function EmployeeListItem(props) {
         } else if (listState.state) {
             if (listState.state==="LOADING") {
                 setListState({state: "LOADED", data: props.employeeArray});
-                console.log(props.employeeArray);
+                // console.log(props.employeeArray);
             }
 
         }
@@ -38,7 +38,7 @@ function EmployeeListItem(props) {
                 <div className="col-2 border">
                     <p>{listState.data.phone}</p>
                 </div>
-                <div className="col-2 border">
+                <div className="col-3 border">
 
                     <p><a href={"mailto: "+listState.data.email}>{listState.data.email}</a></p>
                 </div>
