@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
-import EmployeeList from "./components/EmployeeList";
+import EmployeeListItem from "./components/EmployeeList";
 import axios from "axios";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   }]);
 
   useEffect(() => {
-    for (var i=0; i<1; i++) {
+    // for (var i=0; i<1; i++) {
     axios("https://randomuser.me/api/")
       .then(({ data }) => {
         console.log(data.results);
@@ -27,15 +27,19 @@ function App() {
         };
         
         console.log(stateObj);
-        setState([...state, stateObj]);
+        if (state.image === "") {
+          setState([stateObj]);
+        } else {
+          setState([...state, stateObj]);
+        }
       });
-    }
+    // }
     console.log(state);
   }, []);
 
   return (
     <div>
-      <EmployeeList employeeArray={state} />
+      <EmployeeListItem employeeArray={state} />
     </div>
   );
 }
