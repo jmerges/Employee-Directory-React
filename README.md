@@ -13,4 +13,4 @@ The employees can be sorted by and searched for by name. This was a good exercis
 
 ## Preview
 
-![](../employeeDirectoryPreview.png)
+![](./employeeDirectoryPreview.png)
